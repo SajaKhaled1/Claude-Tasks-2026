@@ -29,10 +29,9 @@ python -m http.server 8000
 
 ## Notes on assets
 
-`assets/hero.jpg` was extracted from the supplied design screenshot, which had
-the design's text baked into the photo itself. That text was removed with
-OpenCV inpainting (`cv2.inpaint`, TELEA algorithm) so the same sofa photo could
-be shown sharp behind the real HTML text without any ghosting.
+`assets/hero.jpg` is the clean, text-free source photo (1440×850) provided for
+the hero background — no baked-in UI text, so it renders sharp with no
+ghosting behind the real HTML heading/paragraph/button.
 
 ## Responsive behaviour
 

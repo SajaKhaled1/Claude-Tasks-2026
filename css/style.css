@@ -82,9 +82,8 @@ ul {
   z-index: -2;
   background-image: url("../assets/hero.jpg");
   background-size: cover;
-  background-position: center 35%;
+  background-position: center 40%;
   background-repeat: no-repeat;
-  filter: saturate(1.15) contrast(1.05);
 }
 
 /* Dark overlay for text contrast — darker toward the top where the heading
