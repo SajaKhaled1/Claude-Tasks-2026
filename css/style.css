@@ -1,0 +1,345 @@
+/* ==========================================================================
+   FurniShop — Landing Page Styles
+   ========================================================================== */
+
+/* Design tokens
+   -------------------------------------------------------------------------- */
+:root {
+  --teal: #2c7a72;
+  --teal-dark: #276b64;
+  --white: #ffffff;
+  --text-muted: #d8dcda;
+  --dark: #1e2220;
+
+  --container: 1120px;
+  --radius: 10px;
+
+  --font: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Reset
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font);
+  color: var(--white);
+  background: var(--dark);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* Layout helper
+   -------------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
+
+/* Hero (background image + overlay)
+   -------------------------------------------------------------------------- */
+.hero {
+  position: relative;
+  min-height: 620px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--dark);
+}
+
+/* Background photo lives on a pseudo-element so foreground text stays crisp.
+   NOTE: the shipped hero.jpg was extracted from the design screenshot and has
+   text baked in; a light blur turns it into a clean backdrop. Replace it with a
+   text-free exported photo and you can drop the `filter` blur below. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -20px; /* bleed so the blur has no soft edges */
+  z-index: -2;
+  background-image: url("../assets/hero.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(11px) brightness(0.8);
+}
+
+/* Dark gradient for text contrast (left-heavy, like the design) */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    100deg,
+    rgba(18, 22, 20, 0.92) 0%,
+    rgba(18, 22, 20, 0.68) 45%,
+    rgba(18, 22, 20, 0.55) 100%
+  );
+}
+
+/* Header / navigation
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: relative;
+  z-index: 20;
+  padding-block: 1.5rem;
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: var(--white);
+}
+
+.primary-nav ul {
+  display: flex;
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+.primary-nav a {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+}
+
+.primary-nav a:hover,
+.primary-nav a.is-active {
+  color: var(--white);
+  font-weight: 700;
+}
+
+/* Mobile nav toggle (hamburger) */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  z-index: 30;
+}
+
+.nav-toggle span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: var(--white);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Hero content
+   -------------------------------------------------------------------------- */
+.hero__content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding-block: 3rem 8rem;
+}
+
+.hero__title {
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 800;
+  line-height: 1.08;
+  max-width: 12ch;
+  margin-bottom: 1.25rem;
+}
+
+.hero__text {
+  max-width: 44ch;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+/* Buttons
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-block;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.85rem 2.25rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.btn--ghost {
+  background: rgba(255, 255, 255, 0.18);
+  color: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(2px);
+}
+
+.btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Stats bar
+   -------------------------------------------------------------------------- */
+.stats {
+  margin-top: -4.5rem;
+  position: relative;
+  z-index: 10;
+  padding-bottom: 3rem;
+}
+
+.stats__grid {
+  background: var(--teal);
+  border-radius: var(--radius);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding-block: 1.75rem;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+}
+
+.stat {
+  text-align: center;
+  padding-inline: 1rem;
+  position: relative;
+}
+
+/* Vertical dividers between stats */
+.stat:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 60%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.stat__number {
+  display: block;
+  font-size: clamp(1.6rem, 4vw, 2.1rem);
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.stat__label {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Responsive
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .primary-nav {
+    position: absolute;
+    inset: 0 0 auto 0;
+    top: 100%;
+    background: rgba(20, 24, 22, 0.97);
+    padding: 1.5rem 0;
+    transform: scaleY(0);
+    transform-origin: top;
+    opacity: 0;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  .primary-nav.is-open {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+
+  .primary-nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  /* Animate hamburger into an X when open */
+  .nav-toggle[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(8.5px) rotate(45deg);
+  }
+  .nav-toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-8.5px) rotate(-45deg);
+  }
+
+  .hero {
+    min-height: 520px;
+  }
+
+  .hero__content {
+    padding-block: 2rem 7rem;
+    text-align: left;
+  }
+
+  .stats__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem 0;
+  }
+
+  /* Only keep divider between columns, not rows */
+  .stat:not(:last-child)::after {
+    display: none;
+  }
+  .stat:nth-child(odd)::after {
+    content: "";
+    display: block;
+    height: 60%;
+  }
+}
+
+@media (max-width: 420px) {
+  .stats__grid {
+    grid-template-columns: 1fr;
+  }
+  .stat:nth-child(odd)::after {
+    display: none;
+  }
+  .stat {
+    padding-block: 0.75rem;
+  }
+}
