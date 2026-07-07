@@ -29,10 +29,10 @@ python -m http.server 8000
 
 ## Notes on assets
 
-`assets/hero.jpg` was extracted from the supplied design screenshot so the page
-renders out of the box. For a **pixel-perfect** result, replace it with the
-clean, text-free exported sofa photo (same filename) — the page text is drawn in
-HTML, so a source image without baked-in text will look best.
+`assets/hero.jpg` was extracted from the supplied design screenshot, which had
+the design's text baked into the photo itself. That text was removed with
+OpenCV inpainting (`cv2.inpaint`, TELEA algorithm) so the same sofa photo could
+be shown sharp behind the real HTML text without any ghosting.
 
 ## Responsive behaviour
 

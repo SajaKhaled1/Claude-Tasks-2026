@@ -74,33 +74,31 @@ ul {
   background: var(--dark);
 }
 
-/* Background photo lives on a pseudo-element so foreground text stays crisp.
-   NOTE: the shipped hero.jpg was extracted from the design screenshot and has
-   text baked in; a light blur turns it into a clean backdrop. Replace it with a
-   text-free exported photo and you can drop the `filter` blur below. */
+/* Background photo lives on a pseudo-element so foreground text stays crisp. */
 .hero::before {
   content: "";
   position: absolute;
-  inset: -20px; /* bleed so the blur has no soft edges */
+  inset: 0;
   z-index: -2;
   background-image: url("../assets/hero.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter: blur(11px) brightness(0.8);
 }
 
-/* Dark gradient for text contrast (left-heavy, like the design) */
+/* Dark overlay for text contrast — darker toward the top where the heading
+   sits, so the centered white text stays readable over the photo. */
 .hero::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
   background: linear-gradient(
-    100deg,
-    rgba(18, 22, 20, 0.92) 0%,
-    rgba(18, 22, 20, 0.68) 45%,
-    rgba(18, 22, 20, 0.55) 100%
+    180deg,
+    rgba(18, 22, 20, 0.78) 0%,
+    rgba(18, 22, 20, 0.5) 40%,
+    rgba(18, 22, 20, 0.35) 70%,
+    rgba(18, 22, 20, 0.45) 100%
   );
 }
 
@@ -172,19 +170,27 @@ ul {
   flex: 1;
   display: flex;
   align-items: center;
+  justify-content: center;
   padding-block: 3rem 8rem;
+  text-align: center;
+}
+
+.hero__content .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .hero__title {
   font-size: clamp(2.4rem, 6vw, 4rem);
   font-weight: 800;
   line-height: 1.08;
-  max-width: 12ch;
+  max-width: 16ch;
   margin-bottom: 1.25rem;
 }
 
 .hero__text {
-  max-width: 44ch;
+  max-width: 46ch;
   font-size: 0.95rem;
   color: var(--text-muted);
   margin-bottom: 2rem;
@@ -313,7 +319,7 @@ ul {
 
   .hero__content {
     padding-block: 2rem 7rem;
-    text-align: left;
+    text-align: center;
   }
 
   .stats__grid {
